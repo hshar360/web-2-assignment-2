@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clothing Shop SPA – COMP 3512 Assignment 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Optional: your own CSS file (or Tailwind/other CSS framework with NO JS) -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Shared Header (appears on all views) -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <span class="logo" aria-label="Store Logo">Clothify</span>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <!-- These will be wired by JS to change views -->
+        <button type="button" class="nav-link" data-view="home">Home</button>
+        <button type="button" class="nav-link" data-view="browse">Browse</button>
+        <button type="button" class="nav-link" data-view="about">About</button>
+      </nav>
+
+      <button type="button" class="cart-button" data-view="cart" aria-label="Shopping cart">
+        Cart
+        <span id="cart-count" class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME VIEW -->
+    <article id="home-view" class="view">
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Discover Your New Favourite Outfit</h1>
+          <p>Curated looks for men and women from our online collection.</p>
+          <button type="button" class="primary-btn" data-view="browse">
+            Start Browsing
+          </button>
+        </div>
+        <div class="hero-image" aria-hidden="true">
+          <!-- You can replace this with a real hero image in CSS -->
+        </div>
+      </section>
+
+      <section class="featured-section">
+        <header class="section-header">
+          <h2>Featured Categories</h2>
+          <p>Jump into some of our most popular departments.</p>
+        </header>
+
+        <div class="featured-grid">
+          <!-- These are just placeholders, JS does not need them -->
+          <article class="featured-card">
+            <h3>Women’s Dresses</h3>
+            <p>Flowy, fitted, and everything in between.</p>
+            <button type="button" class="secondary-btn" data-view="browse" data-gender="womens" data-category="Dresses">
+              Shop Dresses
+            </button>
+          </article>
+
+          <article class="featured-card">
+            <h3>Men’s Outerwear</h3>
+            <p>Layer up with coats and jackets.</p>
+            <button type="button" class="secondary-btn" data-view="browse" data-gender="mens" data-category="Outerwear">
+              Shop Outerwear
+            </button>
+          </article>
+
+          <article class="featured-card">
+            <h3>Accessories</h3>
+            <p>Finish the look with scarves, hats, and more.</p>
+            <button type="button" class="secondary-btn" data-view="browse" data-category="Accessories">
+              Shop Accessories
+            </button>
+          </article>
+        </div>
+      </section>
+    </article>
+
+    <!-- BROWSE VIEW -->
+    <article id="browse-view" class="view hidden">
+      <header class="view-header">
+        <h1>Browse Products</h1>
+      </header>
+
+      <section id="filter-section" class="filter-section">
+        <form id="filter-form">
+          <fieldset class="filter-group">
+            <legend>Gender</legend>
+            <label>
+              <input type="checkbox" name="gender" value="womens">
+              Women
+            </label>
+            <label>
+              <input type="checkbox" name="gender" value="mens">
+              Men
+            </label>
+          </fieldset>
+
+          <fieldset class="filter-group">
+            <legend>Category</legend>
+            <!-- These values should match the JSON category strings -->
+            <label>
+              <input type="checkbox" name="category" value="Tops">
+              Tops
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="Bottoms">
+              Bottoms
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="Dresses">
+              Dresses
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="Outerwear">
+              Outerwear
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="Accessories">
+              Accessories
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="Swimwear">
+              Swimwear
+            </label>
+            <!-- Add more as needed -->
+          </fieldset>
+
+          <fieldset class="filter-group">
+            <legend>Size</legend>
+            <!-- We’ll just list common sizes; JS will still filter by actual product sizes -->
+            <label>
+              <input type="checkbox" name="size" value="XS">
+              XS
+            </label>
+            <label>
+              <input type="checkbox" name="size" value="S">
+              S
+            </label>
+            <label>
+              <input type="checkbox" name="size" value="M">
+              M
+            </label>
+            <label>
+              <input type="checkbox" name="size" value="L">
+              L
+            </label>
+            <label>
+              <input type="checkbox" name="size" value="XL">
+              XL
+            </label>
+          </fieldset>
+
+          <fieldset class="filter-group">
+            <legend>Color</legend>
+            <!-- We will filter by the color.name field in JSON -->
+            <label>
+              <input type="checkbox" name="color" value="Black">
+              Black
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Blue">
+              Blue
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Beige">
+              Beige
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Gray">
+              Gray
+            </label>
+            <label>
+              <input type="checkbox" name="color" value="Multicolor">
+              Multicolor
+            </label>
+          </fieldset>
+
+          <div class="filter-actions">
+            <button type="button" id="clear-filters-btn" class="secondary-btn">
+              Clear All Filters
+            </button>
+          </div>
+        </form>
+
+        <section id="active-filters" class="active-filters" aria-label="Current filters">
+          <!-- JS will inject filter pills here -->
+        </section>
+      </section>
+
+      <section id="results-section" class="results-section">
+        <header class="results-header">
+          <div>
+            <h2>Results</h2>
+            <p id="results-count">Showing 0 products</p>
+          </div>
+
+          <div class="sort-controls">
+            <label for="sort-by">Sort by:</label>
+            <select id="sort-by" name="sort-by">
+              <option value="name">Product Name (A–Z)</option>
+              <option value="price">Price</option>
+              <option value="category">Category</option>
+            </select>
+          </div>
+        </header>
+
+        <div id="results-message" class="results-message">
+          <!-- JS: show “No products match your filters” etc. -->
+        </div>
+
+        <div id="product-grid" class="product-grid">
+          <!-- JS will inject product cards here -->
+        </div>
+      </section>
+    </article>
+
+    <!-- SINGLE PRODUCT VIEW -->
+    <article id="single-product-view" class="view hidden">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol id="breadcrumb-list">
+          <!-- JS will create:
+               Home > Gender > Category > Product Name -->
+        </ol>
+      </nav>
+
+      <section class="single-product-layout">
+        <div class="single-product-images">
+          <div class="main-image-placeholder" aria-label="Main product image"></div>
+          <div class="thumbnail-row">
+            <div class="thumb-placeholder"></div>
+            <div class="thumb-placeholder"></div>
+            <div class="thumb-placeholder"></div>
+          </div>
+        </div>
+
+        <div class="single-product-details">
+          <h1 id="product-name">Product Title</h1>
+          <p id="product-price" class="price">$0.00</p>
+          <p id="product-description">
+            Product description will be displayed here.
+          </p>
+
+          <dl class="product-meta">
+            <div>
+              <dt>Gender</dt>
+              <dd id="product-gender"></dd>
+            </div>
+            <div>
+              <dt>Category</dt>
+              <dd id="product-category"></dd>
+            </div>
+            <div>
+              <dt>Material</dt>
+              <dd id="product-material"></dd>
+            </div>
+            <div>
+              <dt>Available Sizes</dt>
+              <dd id="product-sizes"></dd>
+            </div>
+            <div>
+              <dt>Colors</dt>
+              <dd id="product-colors"></dd>
+            </div>
+          </dl>
+
+          <form id="add-to-cart-form">
+            <label for="product-quantity">Quantity</label>
+            <input
+              id="product-quantity"
+              name="quantity"
+              type="number"
+              min="1"
+              value="1"
+              required
+            >
+            <button type="submit" class="primary-btn">
+              + Add to Cart
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section class="related-section">
+        <header class="section-header">
+          <h2>Related Products</h2>
+          <p>Based on similar category, price, or gender.</p>
+        </header>
+
+        <div id="related-products" class="product-grid">
+          <!-- JS will insert related products here -->
+        </div>
+      </section>
+    </article>
+
+    <!-- SHOPPING CART VIEW -->
+    <article id="cart-view" class="view hidden">
+      <header class="view-header">
+        <h1>Shopping Cart</h1>
+      </header>
+
+      <section id="cart-content">
+        <p id="cart-empty-message" class="cart-empty">
+          Your cart is currently empty.
+        </p>
+
+        <div id="cart-main" class="cart-main hidden">
+          <div class="cart-items-wrapper">
+            <table class="cart-table">
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Color</th>
+                  <th scope="col">Size</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Subtotal</th>
+                  <th scope="col">Remove</th>
+                </tr>
+              </thead>
+              <tbody id="cart-items-body">
+                <!-- JS will inject rows here -->
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="cart-summary">
+            <section class="shipping-options">
+              <h2>Shipping</h2>
+
+              <fieldset>
+                <legend>Method</legend>
+                <label>
+                  <input type="radio" name="shipping-method" value="standard" checked>
+                  Standard
+                </label>
+                <label>
+                  <input type="radio" name="shipping-method" value="express">
+                  Express
+                </label>
+                <label>
+                  <input type="radio" name="shipping-method" value="priority">
+                  Priority
+                </label>
+              </fieldset>
+
+              <label for="shipping-destination">Destination</label>
+              <select id="shipping-destination" name="shipping-destination">
+                <option value="CA">Canada</option>
+                <option value="US">United States</option>
+                <option value="INT">International</option>
+              </select>
+            </section>
+
+            <section class="summary-totals">
+              <h2>Summary</h2>
+              <div class="summary-row">
+                <span>Merchandise</span>
+                <span id="summary-merchandise">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Shipping</span>
+                <span id="summary-shipping">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Tax</span>
+                <span id="summary-tax">$0.00</span>
+              </div>
+              <div class="summary-row summary-total">
+                <span>Total</span>
+                <span id="summary-total">$0.00</span>
+              </div>
+
+              <button type="button" id="checkout-button" class="primary-btn">
+                Checkout
+              </button>
+            </section>
+          </aside>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; <span id="current-year"></span> Clothify. All rights reserved.</p>
+      <p>
+        Assignment 2 – COMP 3512 ·
+        <a href="#" id="github-link" rel="noopener noreferrer">GitHub Repo</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ABOUT US DIALOG -->
+  <dialog id="about-dialog">
+    <form method="dialog" class="about-dialog-content">
+      <header>
+        <h2>About This App</h2>
+      </header>
+
+      <section>
+        <p>
+          This single-page application was built for COMP 3512 Assignment 2
+          using HTML, CSS, and JavaScript. It demonstrates working with
+          JSON data, filters, sorting, and a persistent shopping cart.
+        </p>
+        <p>
+          Developer: <span id="about-student-name">Haniya</span>
+        </p>
+        <p>
+          Technologies: HTML, CSS, JavaScript, Fetch API, Local Storage.
+        </p>
+        <p>
+          GitHub Repo:
+          <a href="#" id="about-github-link" rel="noopener noreferrer">
+            View source on GitHub
+          </a>
+        </p>
+      </section>
+
+      <footer class="dialog-footer">
+        <button type="submit" id="about-close-button" class="secondary-btn">
+          Close
+        </button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Main JavaScript file (you will implement this next, using only lab content) -->
+  <script src="app.js" defer></script>
+</body>
+</html>
