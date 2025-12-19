@@ -5,11 +5,11 @@
   <title>Clothing Shop SPA – COMP 3512 Assignment 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Optional: your own CSS file (or Tailwind/other CSS framework with NO JS) -->
+  
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Shared Header (appears on all views) -->
+  
   <header class="site-header">
     <div class="header-inner">
       <div class="logo-area">
@@ -17,7 +17,7 @@
       </div>
 
       <nav class="main-nav" aria-label="Main navigation">
-        <!-- These will be wired by JS to change views -->
+        
         <button type="button" class="nav-link" data-view="home">Home</button>
         <button type="button" class="nav-link" data-view="browse">Browse</button>
         <button type="button" class="nav-link" data-view="about">About</button>
@@ -31,18 +31,18 @@
   </header>
 
   <main>
-    <!-- HOME VIEW -->
+    
     <article id="home-view" class="view">
       <section class="hero">
         <div class="hero-content">
-          <h1>Discover Your New Favourite Outfit</h1>
+          <h1 >Discover Your New Favourite Outfit</h1>
           <p>Curated looks for men and women from our online collection.</p>
           <button type="button" class="primary-btn" data-view="browse">
             Start Browsing
           </button>
         </div>
         <div class="hero-image" aria-hidden="true">
-          <!-- You can replace this with a real hero image in CSS -->
+          
         </div>
       </section>
 
@@ -53,7 +53,7 @@
         </header>
 
         <div class="featured-grid">
-          <!-- These are just placeholders, JS does not need them -->
+          
           <article class="featured-card">
             <h3>Women’s Dresses</h3>
             <p>Flowy, fitted, and everything in between.</p>
@@ -81,7 +81,7 @@
       </section>
     </article>
 
-    <!-- BROWSE VIEW -->
+    
     <article id="browse-view" class="view hidden">
       <header class="view-header">
         <h1>Browse Products</h1>
@@ -103,7 +103,7 @@
 
           <fieldset class="filter-group">
             <legend>Category</legend>
-            <!-- These values should match the JSON category strings -->
+            
             <label>
               <input type="checkbox" name="category" value="Tops">
               Tops
@@ -128,12 +128,12 @@
               <input type="checkbox" name="category" value="Swimwear">
               Swimwear
             </label>
-            <!-- Add more as needed -->
+            
           </fieldset>
 
           <fieldset class="filter-group">
             <legend>Size</legend>
-            <!-- We’ll just list common sizes; JS will still filter by actual product sizes -->
+            
             <label>
               <input type="checkbox" name="size" value="XS">
               XS
@@ -158,7 +158,7 @@
 
           <fieldset class="filter-group">
             <legend>Color</legend>
-            <!-- We will filter by the color.name field in JSON -->
+            
             <label>
               <input type="checkbox" name="color" value="Black">
               Black
@@ -189,7 +189,7 @@
         </form>
 
         <section id="active-filters" class="active-filters" aria-label="Current filters">
-          <!-- JS will inject filter pills here -->
+          
         </section>
       </section>
 
@@ -211,21 +211,20 @@
         </header>
 
         <div id="results-message" class="results-message">
-          <!-- JS: show “No products match your filters” etc. -->
+          
         </div>
 
         <div id="product-grid" class="product-grid">
-          <!-- JS will inject product cards here -->
+          
         </div>
       </section>
     </article>
 
-    <!-- SINGLE PRODUCT VIEW -->
+    
     <article id="single-product-view" class="view hidden">
       <nav aria-label="Breadcrumb" class="breadcrumb">
         <ol id="breadcrumb-list">
-          <!-- JS will create:
-               Home > Gender > Category > Product Name -->
+         
         </ol>
       </nav>
 
@@ -293,12 +292,12 @@
         </header>
 
         <div id="related-products" class="product-grid">
-          <!-- JS will insert related products here -->
+          
         </div>
       </section>
     </article>
 
-    <!-- SHOPPING CART VIEW -->
+    
     <article id="cart-view" class="view hidden">
       <header class="view-header">
         <h1>Shopping Cart</h1>
@@ -324,7 +323,7 @@
                 </tr>
               </thead>
               <tbody id="cart-items-body">
-                <!-- JS will inject rows here -->
+                
               </tbody>
             </table>
           </div>
@@ -386,7 +385,7 @@
     </article>
   </main>
 
-  <!-- Shared Footer -->
+  
   <footer class="site-footer">
     <div class="footer-inner">
       <p>&copy; <span id="current-year"></span> Clothify. All rights reserved.</p>
@@ -397,7 +396,7 @@
     </div>
   </footer>
 
-  <!-- ABOUT US DIALOG -->
+  
   <dialog id="about-dialog">
     <form method="dialog" class="about-dialog-content">
       <header>
@@ -418,7 +417,7 @@
         </p>
         <p>
           GitHub Repo:
-          <a href="#" id="about-github-link" rel="noopener noreferrer">
+          <a href="https://github.com/hshar360/web-2-assignment-2" id="about-github-link">
             View source on GitHub
           </a>
         </p>
@@ -432,7 +431,7 @@
     </form>
   </dialog>
 
-  <!-- Main JavaScript file (you will implement this next, using only lab content) -->
-  <script src="app.js" defer></script>
+  
+  <script src="app.js"></script>
 </body>
 </html>
