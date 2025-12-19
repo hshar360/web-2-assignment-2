@@ -704,10 +704,10 @@ a:hover {
 }
 
 /* ============================================================
-   TOAST
+   Pop msg
    ============================================================ */
 
-.toast {
+.msg {
   position: fixed;
   bottom: 1rem;
   right: 1rem;
@@ -722,7 +722,7 @@ a:hover {
   z-index: 50;
 }
 
-.toast.show {
+.msg.show {
   opacity: 1;
   transform: translateY(0);
 }
